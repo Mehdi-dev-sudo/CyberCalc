@@ -1,4 +1,4 @@
-# 🛡️ CyberCalc Pro
+# 🛡️ CyberCalc
 
 <div align="center">
 

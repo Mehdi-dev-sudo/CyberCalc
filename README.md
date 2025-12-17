@@ -13,7 +13,7 @@
 *From security to design - everything you expect and more!*
 
 [Live Demo](https://mehdi-khorshidi-far.github.io/cybercalc) ·
-[Report Bug](https://github.com/mehdi-khorshidi-far/cybercalc/issues)
+[Report Bug](https://github.com/Mehdi-dev-sudo/CyberCalc/issues)
 
 </div>
 

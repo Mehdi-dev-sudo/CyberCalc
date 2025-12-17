@@ -461,7 +461,7 @@ This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for d
 
 ## 👨‍💻 Author
 
-**Mehdi Khorshidi Rad**
+**Mehdi Khorshidi far**
 - GitHub: [@mehdi-khorshidi-far](https://github.com/Mehdi-dev-sudo)
 - Telegram: [t.me/Mehdi_ds_KH](https://t.me/Mehdi_ds_KH)
 - Email: mehdi.khorshidi9339@gmail.com

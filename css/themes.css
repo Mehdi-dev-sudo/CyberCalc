@@ -1,0 +1,25 @@
+/* Theme-specific styling */
+[data-theme="light"] {
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.2);
+    --shadow-neon: 0 0 20px rgba(52, 152, 219, 0.3);
+}
+
+[data-theme="dark"] .calc-btn:hover {
+    box-shadow: 0 4px 12px rgba(233, 69, 96, 0.3);
+}
+
+[data-theme="nord"] .calc-btn:hover {
+    box-shadow: 0 4px 12px rgba(136, 192, 208, 0.3);
+}
+
+[data-theme="light"] .calc-btn:hover {
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+/* Theme previews in modal */
+.theme-card.active {
+    border-color: var(--accent-primary) !important;
+    box-shadow: 0 0 20px var(--accent-primary);
+}

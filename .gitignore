@@ -11,7 +11,8 @@ desktop.ini
 # Editor Directories and Files
 .vscode/
 .idea/
-*.sublime-project
+*.sublime-
+ject
 *.sublime-workspace
 *.swp
 *.swo
@@ -29,7 +30,8 @@ lerna-debug.log*
 .env.local
 .env.development.local
 .env.test.local
-.env.production.local
+.env.
+duction.local
 .env.*.local
 
 # Dependencies (if you add npm later)

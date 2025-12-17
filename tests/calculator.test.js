@@ -1,6 +1,6 @@
 
 /**
- * CyberCalc Pro - Test Suite
+ * CyberCalc - Test Suite
  *
  * Comprehensive test suite for the calculator
  * Can be run with Jest or any other test runner
@@ -16,7 +16,7 @@
 // If not using ES6 modules, comment out the line below
 // import { MathParser } from '../js/parser.js';
 
-describe('CyberCalc Pro - Parser Tests', () => {
+describe('CyberCalc - Parser Tests', () => {
     let parser;
 
     beforeEach(() => {

@@ -12,9 +12,9 @@
 
 *From security to design - everything you expect and more!*
 
-[Live Demo](https://mehdi-khorshidi-far.github.io/cybercalc-pro) ·
-[Report Bug](https://github.com/mehdi-khorshidi-far/cybercalc-pro/issues) ·
-[Request Feature](https://github.com/mehdi-khorshidi-far/cybercalc-pro/issues)
+[Live Demo](https://mehdi-khorshidi-far.github.io/cybercalc) ·
+[Report Bug](https://github.com/mehdi-khorshidi-far/cybercalc/issues) ·
+[Request Feature](https://github.com/mehdi-khorshidi-far/cybercalc/issues)
 
 </div>
 
@@ -75,7 +75,7 @@ Escape    → Clear all
 
 ---
 
-## 🎯 Why CyberCalc Pro?
+## 🎯 Why CyberCalc?
 
 ### For Developers
 
@@ -93,7 +93,7 @@ return parser.parse(expression); // Safe!
 
 ### Comparison with Other Calculators
 
-| Feature | CyberCalc Pro | Other Calculators |
+| Feature | CyberCalc | Other Calculators |
 |---------|---------------|-------------------|
 | No eval() | ✅ | ❌ Most use it |
 | Custom Parser | ✅ Shunting Yard | ❌ |
@@ -115,10 +115,10 @@ return parser.parse(expression); // Safe!
 
 bash
 # 1. Clone
-git clone https://github.com/YOUR_USERNAME/cybercalc-pro.git
+git clone https://github.com/YOUR_USERNAME/cybercalc.git
 
 # 2. Navigate to folder
-cd cybercalc-pro
+cd cybercalc
 
 # 3. Open in browser
 # macOS
@@ -198,7 +198,7 @@ Modulo:
 ## 🏗️ Project Architecture
 
 
-cybercalc-pro/
+cybercalc/
 │
 ├── index.html                 # Main entry point
 │
@@ -245,7 +245,7 @@ javascript
 
 ### Parser Algorithm (Shunting Yard)
 
-CyberCalc Pro uses the **Shunting Yard** algorithm to parse and evaluate mathematical expressions safely.
+CyberCalc uses the **Shunting Yard** algorithm to parse and evaluate mathematical expressions safely.
 
 #### How it works:
 

@@ -23,12 +23,13 @@
 ## ✨ Key Features
 
 ### 🔒 **Security First**
-javascript
+```javascript
 ❌ No eval() - JavaScript's most dangerous function
 ✅ Custom parser with Shunting Yard algorithm
 ✅ Input sanitization
 ✅ Safe mathematical expression evaluation
 ✅ Error boundary to prevent crashes
+```
 
 ### 🧮 **Three Calculation Modes**
 

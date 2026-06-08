@@ -1,4 +1,4 @@
-# 🛡️ CyberCalc Pro
+# 🛡️ CyberCalc
 
 <div align="center">
 
@@ -12,9 +12,8 @@
 
 *From security to design - everything you expect and more!*
 
-[Live Demo](https://mehdi-khorshidi-far.github.io/cybercalc) ·
-[Report Bug](https://github.com/mehdi-khorshidi-far/cybercalc/issues) ·
-[Request Feature](https://github.com/mehdi-khorshidi-far/cybercalc/issues)
+[Live Demo](https://mehdi-dev-sudo.github.io/CyberCalc/) ·
+[Report Bug](https://github.com/Mehdi-dev-sudo/CyberCalc/issues)
 
 </div>
 
@@ -60,13 +59,13 @@
 - 🗑️ Clear with confirmation
 
 ### ⌨️ **Full Keyboard Support**
-
-
+```javascript
 0-9       → Numbers
 +, -, *, / → Operators
 Enter     → Calculate
 Backspace → Delete
 Escape    → Clear all
+```
 
 ### 📱 **Responsive & Mobile-First**
 
@@ -80,6 +79,7 @@ Escape    → Clear all
 
 ### For Developers
 
+```javascript
 javascript
 // ❌ Wrong way (using eval)
 function calculate(expression) {
@@ -91,6 +91,7 @@ function calculate(expression) {
 const parser = new MathParser();
 return parser.parse(expression); // Safe!
 }
+```
 
 ### Comparison with Other Calculators
 
@@ -114,22 +115,31 @@ return parser.parse(expression); // Safe!
 
 ### Method 1: Clone Repository
 
-bash
 # 1. Clone
+```bash
 git clone https://github.com/YOUR_USERNAME/cybercalc.git
+```
 
 # 2. Navigate to folder
+```bash
 cd cybercalc
+```
 
 # 3. Open in browser
+```bash
 # macOS
 open index.html
+```
 
 # Linux
+```bash
 xdg-open index.html
+```
 
 # Windows
+```bash
 start index.html
+```
 
 ### Method 2: Direct Download
 
@@ -139,10 +149,11 @@ start index.html
 
 ### Method 3: Live Server
 
-bash
+```bash
 # If you have VS Code
 # Install Live Server extension
 # Right-click on index.html -> Open with Live Server
+```
 
 ---
 
@@ -150,7 +161,7 @@ bash
 
 ### Basic Mode
 
-
+```bash
 Simple calculations:
 2 + 2 = 4
 10 - 5 = 5
@@ -161,10 +172,11 @@ Simple calculations:
 Order of operations:
 2 + 3 × 4 = 14
 (2 + 3) × 4 = 20
+```
 
 ### Scientific Mode
 
-
+```bash
 Trigonometric functions:
 sin(30) = 0.5
 cos(0) = 1
@@ -177,10 +189,11 @@ ln(e) = 1
 Power and root:
 2^8 = 256
 sqrt(16) = 4
+```
 
 ### Programmer Mode
 
-
+```bash
 Bitwise operations:
 5 AND 3 = 1      (0101 & 0011 = 0001)
 5 OR 3 = 7       (0101 | 0011 = 0111)
@@ -193,12 +206,13 @@ Shift operations:
 
 Modulo:
 17 MOD 5 = 2
+```
 
 ---
 
 ## 🏗️ Project Architecture
 
-
+```bash
 cybercalc/
 │
 ├── index.html                 # Main entry point
@@ -220,10 +234,11 @@ cybercalc/
 ├── README.md                 # This file
 ├── LICENSE                   # MIT License
 └── .gitignore               # Ignored files
+```
 
 ### Code Architecture
 
-javascript
+```javascript
 // Separation of Concerns
 ┌─────────────────┐
 │  index.html     │  ← View Layer
@@ -239,6 +254,7 @@ javascript
 │parser │ │history│ │themes │ │utils │
 └───────┘ └───────┘ └───────┘ └──────┘
 ↑ Model Layer
+```
 
 ---
 
@@ -250,12 +266,13 @@ CyberCalc uses the **Shunting Yard** algorithm to parse and evaluate mathematica
 
 #### How it works:
 
-javascript
+```javascript
 // 1. Tokenization
 "3 + 4 * 2" → [3, '+', 4, '*', 2]
 
 // 2. Infix to Postfix (RPN)
 [3, '+', 4, '*', 2] → [3, 4, 2, '*', '+']
+
 
 // 3. Stack-based evaluation
 Stack: [3]
@@ -264,6 +281,7 @@ Stack: [3, 4, 2]
 Stack: [3, 8]      // 4 * 2
 Stack: [11]        // 3 + 8
 Result: 11
+```
 
 #### Advantages:
 
@@ -274,7 +292,7 @@ Result: 11
 
 ### Data Storage
 
-javascript
+```javascript
 // LocalStorage Structure
 {
   "calculatorHistory": [
@@ -287,6 +305,7 @@ javascript
   ],
   "calculatorTheme": "cyber"
 }
+```
 
 ### Browser Support
 
@@ -306,7 +325,7 @@ javascript
 
 **Step 1:** Define theme in `js/themes.js`:
 
-javascript
+```javascript
 this.themes = {
 // ... existing themes
 matrix: {
@@ -321,18 +340,20 @@ matrix: {
 '--border-color': 'rgba(0, 255, 0, 0.2)'
 }
 };
+```
 
 **Step 2:** Add button in `index.html`:
 
-html
+```html
 <button class="theme-card" data-theme="matrix">
 <div class="theme-preview" style="background: linear-gradient(135deg, #000000, #00ff00)"></div>
 <span>Matrix</span>
 </button>
+```
 
 ### Adding New Function to Parser
 
-javascript
+```javascript
 // In parser.js
 const FUNCTIONS = {
 // ... existing functions
@@ -347,6 +368,7 @@ result *= i;
 return result;
 }
 };
+```
 
 ---
 
@@ -354,11 +376,12 @@ return result;
 
 ### Running Tests
 
-bash
+```bash
 # Open tests/calculator.test.js in browser
 # Or use Jest:
 npm install --save-dev jest
 npm test
+```
 
 ### Test Coverage
 
@@ -388,14 +411,11 @@ Contributions are welcome! 🎉
 
 ### Development Guidelines
 
-javascript
-// Code Style
 - Use camelCase for variables
 - Write comments for complex logic
 - Write comprehensive tests
 - Update README
 
-// Commit Messages
 feat: Add new feature
 fix: Fix bug
 docs: Update documentation
@@ -423,7 +443,7 @@ This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for d
 
 ## 📊 Project Stats
 
-javascript
+```javascript
 {
   "linesOfCode": "2000+",
   "files": 10,
@@ -435,49 +455,15 @@ javascript
   "framework": "Vanilla JavaScript",
   "testCoverage": "Comprehensive"
 }
-
----
-
-## 🔮 Roadmap
-
-### Version 1.1.0
-- [ ] More themes (Matrix, Dracula, Solarized)
-- [ ] Unit conversion mode
-- [ ] PWA support (offline mode)
-
-### Version 1.2.0
-- [ ] Graph plotting
-- [ ] Currency conversion with API
-- [ ] Plugin system for custom functions
-
-### Version 2.0.0
-- [ ] Multi-language support
-- [ ] Collaborative calculations
-- [ ] Desktop app with Electron
-
----
-
-## 💡 FAQ
-
-**Q: Is this production-ready?**
-A: Yes! Code is fully tested and optimized.
-
-**Q: Why not use eval()?**
-A: eval() is a major security vulnerability. We built our own safe parser.
-
-**Q: Can I use this commercially?**
-A: Yes! MIT License allows commercial use.
-
-**Q: How can I contribute?**
-A: Fork, Code, Pull Request! We welcome contributions.
+```
 
 ---
 
 ## 👨‍💻 Author
 
-**Mehdi Khorshidi Rad**
+**Mehdi Khorshidi far**
 - GitHub: [@mehdi-khorshidi-far](https://github.com/Mehdi-dev-sudo)
-- Telegram: [@Mehdi_ds_KH](https://t.me/Mehdi_ds_KH)
+- Telegram: [t.me/Mehdi_ds_KH](https://t.me/Mehdi_ds_KH)
 - Email: mehdi.khorshidi9339@gmail.com
 
 ---

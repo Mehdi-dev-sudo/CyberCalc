@@ -6,6 +6,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-00ff88.svg)](LICENSE)
 [![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-00d4ff.svg)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![Tests](https://img.shields.io/badge/tests-34%20passing-00ff88.svg)](tests/calculator.test.js)
+[![CI](https://img.shields.io/github/actions/workflow/status/Mehdi-dev-sudo/CyberCalc/test.yml?branch=main&label=CI&color=00d4ff)](.github/workflows/test.yml)
 [![No Dependencies](https://img.shields.io/badge/dependencies-0-00ff88.svg)]()
 [![Security First](https://img.shields.io/badge/Security-First-00ff88.svg)]()
 
@@ -60,13 +61,28 @@
 - 🗑️ Clear with confirmation
 
 ### ⌨️ **Full Keyboard Support**
-```javascript
-0-9       → Numbers
-+, -, *, / → Operators
-Enter     → Calculate
-Backspace → Delete
-Escape    → Clear all
-```
+
+| Key | Action |
+|-----|--------|
+| `0-9` | Numbers |
+| `+` `-` `*` `/` `%` | Operators |
+| `(` `)` | Parentheses |
+| `Enter` / `=` | Calculate |
+| `Backspace` | Delete last character |
+| `Escape` | Clear all |
+| `?` | Show keyboard shortcuts |
+| `Ctrl+C` | Copy result to clipboard |
+
+### 📋 **Other Highlights**
+
+| Feature | Description |
+|---------|-------------|
+| 🔔 **Toast Notifications** | Slide-in error/success messages, auto-dismiss |
+| 📋 **Copy Result** | Click result to copy, or `Ctrl+C` |
+| 🌡️ **Degrees / Radians** | Toggle for trig functions in Scientific mode |
+| 🔢 **Number Formatting** | Automatic comma separators (`1,000,000`) |
+| ❓ **Shortcuts Overlay** | Press `?` to see all keyboard shortcuts |
+| 🤖 **CI Pipeline** | Automated test run on every push via GitHub Actions |
 
 ### 📱 **Responsive & Mobile-First**
 
@@ -216,11 +232,16 @@ cybercalc/
 │   └── themes.js             # Theme management
 │
 ├── tests/
-│   └── calculator.test.js    # Unit tests
+│   └── calculator.test.js    # Unit tests (Jest)
 │
-├── README.md                 # This file
-├── LICENSE                   # MIT License
-└── .gitignore               # Ignored files
+├── .github/
+│   └── workflows/
+│       └── test.yml          # CI pipeline
+│
+├── package.json               # Project metadata & scripts
+├── README.md                  # This file
+├── LICENSE                    # MIT License
+└── .gitignore                # Ignored files
 ```
 
 ### Code Architecture
@@ -437,13 +458,14 @@ This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for d
 ```javascript
 {
   "version": "1.1.0",
-  "linesOfCode": "2500+",
-  "files": 13,
+  "linesOfCode": "2800+",
+  "files": 15,
   "tests": 34,
   "browserSupport": ["Chrome", "Firefox", "Safari", "Edge", "Opera"],
   "mobileSupport": true,
   "dependencies": 0,
   "buildTools": 0,
+  "ciPipeline": "GitHub Actions",
   "framework": "Vanilla JavaScript",
   "testRunner": "Jest",
   "testCoverage": "Comprehensive"

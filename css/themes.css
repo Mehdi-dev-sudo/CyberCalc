@@ -18,6 +18,15 @@
     box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
 }
 
+/* Toast in light theme */
+[data-theme="light"] .toast.error {
+    background: rgba(231, 76, 60, 0.1);
+}
+
+[data-theme="light"] .toast.success {
+    background: rgba(46, 204, 113, 0.1);
+}
+
 /* Theme previews in modal */
 .theme-card.active {
     border-color: var(--accent-primary) !important;

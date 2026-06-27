@@ -248,7 +248,7 @@ class Calculator {
     this.hideError();
 
     if (btn.type === 'function') {
-      this.handleFunction(btn.action);
+      this.handleFunction(btn.action, btn.value);
     } else if (btn.type === 'number') {
       this.handleNumber(btn.value);
     } else if (btn.type === 'operator') {

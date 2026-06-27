@@ -43,7 +43,7 @@ class Calculator {
           action: 'backspace',
           class: 'function',
         },
-        { label: '%', type: 'operator', value: '/100*', class: 'operator' },
+        { label: '%', type: 'operator', value: '%', class: 'operator' },
         { label: '÷', type: 'operator', value: '/', class: 'operator' },
 
         { label: '7', type: 'number', value: '7' },
@@ -80,12 +80,18 @@ class Calculator {
           class: 'function',
         },
         {
+          label: 'MR',
+          type: 'function',
+          action: 'memoryRecall',
+          class: 'function',
+        },
+
+        {
           label: 'M+',
           type: 'function',
           action: 'memoryAdd',
           class: 'function',
         },
-
         {
           label: 'sin',
           type: 'function',
@@ -273,12 +279,13 @@ class Calculator {
       this.isResultDisplayed = false;
     }
 
-    // Prevent multiple operators
+    const operators = new Set(['+', '-', '*', '/', '^', '%', '&', '|', '<<', '>>', 'xor']);
+    const lastToken = this.expression.match(/[a-z]+|<<|>>|.$/)?.[0] || '';
+
     if (this.expression.length === 0 && value !== '-') return;
 
-    const lastChar = this.expression[this.expression.length - 1];
-    if ('+-*/^'.includes(lastChar) && '+-*/^'.includes(value)) {
-      this.expression = this.expression.slice(0, -1);
+    if (operators.has(lastToken) && operators.has(value)) {
+      this.expression = this.expression.slice(0, -lastToken.length);
     }
 
     this.expression += value;
@@ -328,6 +335,15 @@ class Calculator {
         this.expression += this.memory.toString();
         break;
 
+      case 'not':
+        if (this.isResultDisplayed) {
+          this.expression = `not(${this.lastResult})`;
+          this.isResultDisplayed = false;
+        } else {
+          this.expression = `not(${this.expression || 0})`;
+        }
+        break;
+
       default:
         console.warn('Unknown function:', action);
     }
@@ -337,11 +353,14 @@ class Calculator {
     if (!this.expression) return;
 
     try {
-      // Replace user-friendly symbols with parser-compatible ones
       let parsedExpression = this.expression
         .replace(/×/g, '*')
         .replace(/÷/g, '/')
         .replace(/π/g, Math.PI.toString());
+
+      if (this.currentMode === 'programmer') {
+        parsedExpression = parsedExpression.replace(/\^/g, 'xor');
+      }
 
       const result = this.parser.parse(parsedExpression);
 
@@ -421,7 +440,7 @@ class Calculator {
     // History toggle
     document.getElementById('historyToggle').addEventListener('click', () => {
       const panel = document.getElementById('historyPanel');
-      panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+      panel.classList.toggle('visible');
       this.historyManager.render();
     });
 
@@ -433,10 +452,10 @@ class Calculator {
       } else if (e.key === '.') {
         this.handleNumber('.');
         this.updateDisplay();
-      } else if ('+-*/'.includes(e.key)) {
+      } else if ('+-*/%'.includes(e.key)) {
         this.handleOperator(e.key);
         this.updateDisplay();
-      } else if (e.key === 'Enter') {
+      } else if (e.key === 'Enter' || e.key === '=') {
         e.preventDefault();
         this.calculate();
         this.updateDisplay();
@@ -446,16 +465,26 @@ class Calculator {
       } else if (e.key === 'Escape') {
         this.handleFunction('clear');
         this.updateDisplay();
+      } else if (e.key === '(' || e.key === ')') {
+        this.handleOperator(e.key);
+        this.updateDisplay();
       }
     });
 
     // Theme toggle
     document.getElementById('themeToggle').addEventListener('click', () => {
-      document.getElementById('themeModal').style.display = 'flex';
+      document.getElementById('themeModal').classList.add('visible');
     });
 
     document.getElementById('closeThemeModal').addEventListener('click', () => {
-      document.getElementById('themeModal').style.display = 'none';
+      document.getElementById('themeModal').classList.remove('visible');
+    });
+
+    // Close modal on backdrop click
+    document.getElementById('themeModal').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) {
+        document.getElementById('themeModal').classList.remove('visible');
+      }
     });
   }
 }

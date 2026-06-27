@@ -16,10 +16,15 @@ export class MathParser {
       '_neg': { precedence: 6, associativity: 'R' },
     };
 
+    const DEG = Math.PI / 180;
+
     this.functions = {
       sin: Math.sin,
       cos: Math.cos,
       tan: Math.tan,
+      sin_deg: (x) => Math.sin(x * DEG),
+      cos_deg: (x) => Math.cos(x * DEG),
+      tan_deg: (x) => Math.tan(x * DEG),
       sqrt: Math.sqrt,
       ln: Math.log,
       log: Math.log10,

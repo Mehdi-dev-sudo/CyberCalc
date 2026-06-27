@@ -13,6 +13,8 @@ class Calculator {
     this.lastResult = 0;
     this.memory = 0;
     this.isResultDisplayed = false;
+    this.degMode = true;
+    this.toastTimer = null;
 
     this.init();
   }
@@ -31,6 +33,8 @@ class Calculator {
     this.buttonsGrid = document.getElementById('buttonsGrid');
     this.modeIndicator = document.querySelector('.mode-indicator');
     this.memoryIndicator = document.querySelector('.memory-indicator');
+    this.degToggle = document.querySelector('.deg-toggle');
+    this.toastContainer = document.getElementById('toastContainer');
   }
 
   renderButtons() {
@@ -362,6 +366,10 @@ class Calculator {
         parsedExpression = parsedExpression.replace(/\^/g, 'xor');
       }
 
+      if (this.degMode && this.currentMode === 'scientific') {
+        parsedExpression = parsedExpression.replace(/\b(sin|cos|tan)\(/g, '$1_deg(');
+      }
+
       const result = this.parser.parse(parsedExpression);
 
       // Format result
@@ -375,7 +383,6 @@ class Calculator {
       this.lastResult = formattedResult;
       this.isResultDisplayed = true;
 
-      // Add to history
       this.historyManager.add(this.expression, formattedResult);
 
       this.expression = formattedResult.toString();
@@ -392,24 +399,53 @@ class Calculator {
       this.expressionDisplay.textContent = this.expression || '';
       this.resultDisplay.textContent = this.expression || '0';
     }
+    if (this.degToggle) {
+      this.degToggle.style.display = this.currentMode === 'scientific' ? 'inline-flex' : 'none';
+    }
   }
 
   formatNumber(num) {
     if (Math.abs(num) >= 1e9 || (Math.abs(num) < 1e-6 && num !== 0)) {
       return num.toExponential(6);
     }
-    return num.toString();
-  }
-
-  showError(message) {
-    this.errorDisplay.textContent = `⚠️ ${message}`;
-    this.errorDisplay.style.display = 'block';
-
-    setTimeout(() => this.hideError(), 3000);
+    const str = num.toString();
+    const parts = str.split('.');
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return parts.join('.');
   }
 
   hideError() {
     this.errorDisplay.style.display = 'none';
+  }
+
+  showToast(message, type = 'error') {
+    if (this.toastTimer) clearTimeout(this.toastTimer);
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.className = `toast ${type} visible`;
+    this.toastTimer = setTimeout(() => {
+      toast.classList.remove('visible');
+    }, 3000);
+  }
+
+  copyResult() {
+    const text = this.resultDisplay.textContent;
+    if (text && text !== '0') {
+      navigator.clipboard.writeText(text.replace(/,/g, '')).then(() => {
+        this.showToast('Result copied to clipboard', 'success');
+      });
+    }
+  }
+
+  toggleDegMode() {
+    this.degMode = !this.degMode;
+    this.degToggle.textContent = this.degMode ? 'DEG' : 'RAD';
+    this.degToggle.classList.toggle('active', this.degMode);
+    this.showToast(`Mode: ${this.degMode ? 'Degrees' : 'Radians'}`, 'success');
+  }
+
+  toggleShortcuts() {
+    document.getElementById('shortcutsModal').classList.toggle('visible');
   }
 
   updateMemoryIndicator() {
@@ -468,6 +504,11 @@ class Calculator {
       } else if (e.key === '(' || e.key === ')') {
         this.handleOperator(e.key);
         this.updateDisplay();
+      } else if (e.key === '?' || (e.key === '/' && e.shiftKey)) {
+        e.preventDefault();
+        this.toggleShortcuts();
+      } else if (e.key === 'c' && (e.ctrlKey || e.metaKey)) {
+        this.copyResult();
       }
     });
 
@@ -484,6 +525,27 @@ class Calculator {
     document.getElementById('themeModal').addEventListener('click', (e) => {
       if (e.target === e.currentTarget) {
         document.getElementById('themeModal').classList.remove('visible');
+      }
+    });
+
+    // Deg/Rad toggle
+    if (this.degToggle) {
+      this.degToggle.addEventListener('click', () => this.toggleDegMode());
+    }
+
+    // Copy result on result click
+    this.resultDisplay.addEventListener('click', () => this.copyResult());
+
+    // Shortcuts toggle button
+    document.getElementById('shortcutsToggle')?.addEventListener('click', () => this.toggleShortcuts());
+
+    // Close shortcuts modal
+    document.getElementById('closeShortcutsModal')?.addEventListener('click', () => {
+      document.getElementById('shortcutsModal').classList.remove('visible');
+    });
+    document.getElementById('shortcutsModal')?.addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) {
+        document.getElementById('shortcutsModal').classList.remove('visible');
       }
     });
   }

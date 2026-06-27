@@ -2,9 +2,10 @@
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-1.0.0-00ff88.svg)
+![Version](https://img.shields.io/badge/version-1.1.0-00ff88.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-00ff88.svg)](LICENSE)
 [![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-00d4ff.svg)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![Tests](https://img.shields.io/badge/tests-34%20passing-00ff88.svg)](tests/calculator.test.js)
 [![No Dependencies](https://img.shields.io/badge/dependencies-0-00ff88.svg)]()
 [![Security First](https://img.shields.io/badge/Security-First-00ff88.svg)]()
 
@@ -80,7 +81,6 @@ Escape    → Clear all
 ### For Developers
 
 ```javascript
-javascript
 // ❌ Wrong way (using eval)
 function calculate(expression) {
 return eval(expression); // Dangerous!
@@ -115,31 +115,18 @@ return parser.parse(expression); // Safe!
 
 ### Method 1: Clone Repository
 
-# 1. Clone
 ```bash
-git clone https://github.com/YOUR_USERNAME/cybercalc.git
-```
-
-# 2. Navigate to folder
-```bash
+git clone https://github.com/Mehdi-dev-sudo/CyberCalc.git
 cd cybercalc
 ```
 
-# 3. Open in browser
-```bash
-# macOS
-open index.html
-```
+Then open in your browser:
 
-# Linux
-```bash
-xdg-open index.html
-```
-
-# Windows
-```bash
-start index.html
-```
+| Platform | Command |
+|----------|---------|
+| macOS    | `open index.html` |
+| Linux    | `xdg-open index.html` |
+| Windows  | `start index.html` |
 
 ### Method 2: Direct Download
 
@@ -273,7 +260,6 @@ CyberCalc uses the **Shunting Yard** algorithm to parse and evaluate mathematica
 // 2. Infix to Postfix (RPN)
 [3, '+', 4, '*', 2] → [3, 4, 2, '*', '+']
 
-
 // 3. Stack-based evaluation
 Stack: [3]
 Stack: [3, 4]
@@ -377,23 +363,23 @@ return result;
 ### Running Tests
 
 ```bash
-# Open tests/calculator.test.js in browser
-# Or use Jest:
-npm install --save-dev jest
+npm install
 npm test
 ```
 
+> **34 tests** covering basic operations, order of operations, decimals, negatives, scientific functions, bitwise ops, edge cases, security, and performance.
+
 ### Test Coverage
 
-- ✅ Basic operations (40+ tests)
-- ✅ Order of operations
-- ✅ Decimal numbers
-- ✅ Negative numbers
-- ✅ Scientific functions
-- ✅ Bitwise operations
-- ✅ Edge cases
-- ✅ Security tests
-- ✅ Performance tests
+- ✅ Basic operations
+- ✅ Order of operations (PEMDAS)
+- ✅ Decimal numbers & precision
+- ✅ Negative numbers & unary minus
+- ✅ Scientific functions (sin, cos, tan, log, ln, sqrt)
+- ✅ Bitwise operations (AND, OR, XOR, NOT, <<, >>, %)
+- ✅ Error handling (division by zero, invalid input)
+- ✅ Security (injection prevention, no eval)
+- ✅ Performance (< 10ms for 1000 calculations)
 
 ---
 
@@ -414,14 +400,19 @@ Contributions are welcome! 🎉
 - Use camelCase for variables
 - Write comments for complex logic
 - Write comprehensive tests
-- Update README
+- Update README for user-facing changes
 
-feat: Add new feature
-fix: Fix bug
-docs: Update documentation
-style: CSS/style changes
-refactor: Code refactoring
-test: Add tests
+### Commit Convention
+
+| Prefix    | Usage                     |
+|-----------|---------------------------|
+| `feat`    | New feature               |
+| `fix`     | Bug fix                   |
+| `docs`    | Documentation changes     |
+| `style`   | CSS / UI polish           |
+| `refactor`| Code restructuring        |
+| `test`    | Adding or fixing tests    |
+| `chore`   | Build / tooling           |
 
 ---
 
@@ -445,14 +436,16 @@ This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for d
 
 ```javascript
 {
-  "linesOfCode": "2000+",
-  "files": 10,
-  "fileSize": "~97K",
-  "browserSupport": ["Chrome", "Firefox", "Safari", "Edge"],
+  "version": "1.1.0",
+  "linesOfCode": "2500+",
+  "files": 13,
+  "tests": 34,
+  "browserSupport": ["Chrome", "Firefox", "Safari", "Edge", "Opera"],
   "mobileSupport": true,
   "dependencies": 0,
   "buildTools": 0,
   "framework": "Vanilla JavaScript",
+  "testRunner": "Jest",
   "testCoverage": "Comprehensive"
 }
 ```

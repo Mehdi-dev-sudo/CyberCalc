@@ -79,9 +79,8 @@ export class ThemeManager {
       card.addEventListener('click', () => {
         const theme = card.dataset.theme;
         this.applyTheme(theme);
-        document.getElementById('themeModal').style.display = 'none';
+        document.getElementById('themeModal').classList.remove('visible');
 
-        // Add visual feedback
         document.querySelectorAll('.theme-card').forEach(c => {
           c.style.borderColor = 'var(--border-color)';
         });

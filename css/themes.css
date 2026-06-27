@@ -23,3 +23,38 @@
     border-color: var(--accent-primary) !important;
     box-shadow: 0 0 20px var(--accent-primary);
 }
+
+/* History panel slide */
+.history-panel {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    transform: translateX(20px);
+    pointer-events: none;
+}
+
+.history-panel.visible {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+/* Modal transition */
+.modal {
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform: scale(0.9);
+}
+
+.modal.visible .modal-content {
+    transform: scale(1);
+}

@@ -163,7 +163,12 @@ body {
 .mode-btn.active {
     background: var(--accent-primary);
     color: var(--bg-primary);
-    box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+    box-shadow: var(--shadow-neon);
+}
+
+/* Smooth mode switch */
+.mode-btn {
+    transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Display */

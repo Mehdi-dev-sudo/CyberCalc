@@ -2,11 +2,18 @@
 export class MathParser {
   constructor() {
     this.operators = {
-      '+': { precedence: 1, associativity: 'L' },
-      '-': { precedence: 1, associativity: 'L' },
-      '*': { precedence: 2, associativity: 'L' },
-      '/': { precedence: 2, associativity: 'L' },
-      '^': { precedence: 3, associativity: 'R' },
+      '|': { precedence: 0.5, associativity: 'L' },
+      'xor': { precedence: 1, associativity: 'L' },
+      '&': { precedence: 1.5, associativity: 'L' },
+      '<<': { precedence: 2.5, associativity: 'L' },
+      '>>': { precedence: 2.5, associativity: 'L' },
+      '+': { precedence: 3, associativity: 'L' },
+      '-': { precedence: 3, associativity: 'L' },
+      '*': { precedence: 4, associativity: 'L' },
+      '/': { precedence: 4, associativity: 'L' },
+      '%': { precedence: 4, associativity: 'L' },
+      '^': { precedence: 5, associativity: 'R' },
+      '_neg': { precedence: 6, associativity: 'R' },
     };
 
     this.functions = {
@@ -17,6 +24,7 @@ export class MathParser {
       ln: Math.log,
       log: Math.log10,
       abs: Math.abs,
+      not: (x) => ~x,
     };
   }
 
@@ -48,8 +56,32 @@ export class MathParser {
         continue;
       }
 
-      // Operators
-      if ('+-*/^'.includes(char)) {
+      // Multi-char operators
+      if (char === '<' && expression[i + 1] === '<') {
+        tokens.push({ type: 'operator', value: '<<' });
+        i += 2;
+        continue;
+      }
+      if (char === '>' && expression[i + 1] === '>') {
+        tokens.push({ type: 'operator', value: '>>' });
+        i += 2;
+        continue;
+      }
+
+      // Operators (single char)
+      if ('+-*/^%&|'.includes(char)) {
+        // Detect unary minus/plus
+        if (char === '-' || char === '+') {
+          const last = tokens[tokens.length - 1];
+          const isUnary = !last || last.value === '(' || last.type === 'operator' || last.type === 'function';
+          if (isUnary) {
+            if (char === '-') {
+              tokens.push({ type: 'operator', value: '_neg' });
+            }
+            i++;
+            continue;
+          }
+        }
         tokens.push({ type: 'operator', value: char });
         i++;
         continue;
@@ -62,14 +94,16 @@ export class MathParser {
         continue;
       }
 
-      // Functions
+      // Functions and named operators
       if (/[a-zA-Z]/.test(char)) {
         let func = '';
         while (i < expression.length && /[a-zA-Z]/.test(expression[i])) {
           func += expression[i];
           i++;
         }
-        if (this.functions[func]) {
+        if (func === 'xor') {
+          tokens.push({ type: 'operator', value: 'xor' });
+        } else if (this.functions[func]) {
           tokens.push({ type: 'function', value: func });
         } else {
           throw new Error(`Unknown function: ${func}`);
@@ -151,12 +185,20 @@ export class MathParser {
       if (token.type === 'number') {
         stack.push(token.value);
       } else if (token.type === 'operator') {
+        let result;
+
+        if (token.value === '_neg') {
+          if (stack.length < 1) throw new Error('Invalid expression');
+          result = -stack.pop();
+          stack.push(result);
+          continue;
+        }
+
         if (stack.length < 2) {
           throw new Error('Invalid expression');
         }
         const b = stack.pop();
         const a = stack.pop();
-        let result;
 
         switch (token.value) {
           case '+':
@@ -172,8 +214,27 @@ export class MathParser {
             if (b === 0) throw new Error('Division by zero');
             result = a / b;
             break;
+          case '%':
+            if (b === 0) throw new Error('Division by zero');
+            result = a % b;
+            break;
           case '^':
             result = Math.pow(a, b);
+            break;
+          case '&':
+            result = a & b;
+            break;
+          case '|':
+            result = a | b;
+            break;
+          case 'xor':
+            result = a ^ b;
+            break;
+          case '<<':
+            result = a << b;
+            break;
+          case '>>':
+            result = a >> b;
             break;
           default:
             throw new Error(`Unknown operator: ${token.value}`);

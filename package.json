@@ -1,0 +1,35 @@
+{
+  "name": "cybercalc",
+  "version": "1.1.0",
+  "description": "A secure, powerful calculator with 3 modes, 4 themes, and a safe Shunting-Yard parser — zero dependencies.",
+  "keywords": [
+    "calculator",
+    "scientific-calculator",
+    "programmer-calculator",
+    "shunting-yard",
+    "vanilla-javascript",
+    "security-first"
+  ],
+  "homepage": "https://github.com/Mehdi-dev-sudo/CyberCalc",
+  "bugs": {
+    "url": "https://github.com/Mehdi-dev-sudo/CyberCalc/issues"
+  },
+  "license": "MIT",
+  "author": "Mehdi Khorshidi far <mehdi.khorshidi9339@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mehdi-dev-sudo/CyberCalc.git"
+  },
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
+    "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  }
+}
